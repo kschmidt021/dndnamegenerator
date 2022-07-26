@@ -1,0 +1,99 @@
+{% extends 'namegenerator/base.html' %}
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+    $("#nation").hide();
+    $("#nationhead").hide();
+    $("#race").change(function(){
+        if($(this).val() == "human"){
+          $("#nation").show();
+          $("#nationhead").show();
+        }else{
+          $("#nation").hide();
+          $("#nationhead").hide();
+        }
+    $('#btnreset').click(function(){
+        if($("#race").val() == "human"){
+            $("#nation").hide();
+            $("#nationhead").hide();
+        }
+    }); 
+    });
+});
+</script>
+
+<div class="container-fluid text-center">
+    <h1>Dungeons and Dragons 5e Name Generator</h1>
+</div>
+
+</br></br>
+
+<div class="container-fluid text-center">
+    <form action="{% url 'namegenerator' %}" >
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-2">
+                <h4>RACE</h4>
+                <select class="form-control" name="race" id="race" required>
+                    <option value= "" selected disabled>Select a Player Race:</option>
+                    <option value="dragonborn">Dragonborn</option>
+                    <option value="dwarf">Dwarf</option>
+                    <option value="elf">Elf</option>
+                    <option value="gnome">Gnome</option>
+                    <option value="halfling">Halfling</option>
+                    <option value="half-orc">Half-Orc</option>
+                    <option value="tiefling">Tiefling</option>
+                    <option value="human">Human</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <h4>GENDER</h4>
+                <select class="form-control" name="gender" required>
+                    <option value = "" selected disabled>Select a Player Gender:</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="nonbinary">Nonbinary</option>
+                </select>
+            </div>
+        </div>
+</br></br>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                    <h5 name="nationhead" id="nationhead">HUMAN NATIONALITY</h5>
+                    <select class="form-control-sm" name="nation" id="nation">
+                        <option selected disabled>Select a Human Nationality:</option>
+                        <option value="arabic">Arabic</option>
+                        <option value="celtic">Celtic</option>
+                        <option value="chinese">Chinese</option>
+                        <option value="egyptian">Egyptian</option>
+                        <option value="english">English</option>
+                        <option value="french">French</option>
+                        <option value="greek">Greek</option>
+                        <option value="german">German</option>
+                        <option value="indian">Indian</option>
+                        <option value="japanese">Japanese</option>
+                        <option value="mesoamerican">Mesoamerican</option>
+                        <option value="african">Niger-Congo</option>
+                        <option value="norse">Norse</option>
+                        <option value="polynesian">Polynesian</option>
+                        <option value="roman">Roman</option>
+                        <option value="slavic">Slavic</option>
+                        <option value="slavic">Spanish</option>
+                    </select>
+            </div>
+        </div></br>
+        <button class=" btn btn-success" type="submit">Generate Name </button>
+        <button class="btn btn-secondary" type="reset" id="btnreset">Reset</button>
+    </form>
+</div>
+
+<div class = "container-fluid text-center">
+</br></br>
+    <h2>{{ created_name }}</h2>
+    <h5><i>{{ race }} {{ nation }} {{ gender }}</i></h5>
+</div>
+
+{% endblock %}
